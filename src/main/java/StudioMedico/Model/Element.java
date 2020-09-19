@@ -37,13 +37,10 @@ public class Element implements Serializable {
     @ManyToOne(targetEntity = TypeFood.class)
     private TypeFood typeFood;
     @Column(nullable = false)
-   
     private Double quantity;
     @Column(nullable = false)
-  
     private Double minmum;
     @Column(nullable = false)
-  
     private Double maximum;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
