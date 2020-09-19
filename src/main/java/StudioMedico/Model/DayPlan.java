@@ -6,6 +6,7 @@
 package StudioMedico.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +40,11 @@ public class DayPlan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDayPlan;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    private Date day;
     @OneToMany(targetEntity = Element.class)
     private List<Element> breakfastList; //colazione    
     @OneToMany(targetEntity = Element.class)
