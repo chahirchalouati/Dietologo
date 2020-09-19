@@ -5,7 +5,6 @@
  */
 package StudioMedico.RestController;
 
-import StudioMedico.Exception.Exceptions.ElementNotFoundException;
 import StudioMedico.Model.Element;
 import StudioMedico.Repository.ElementRepository;
 import javax.validation.Valid;
@@ -39,9 +38,9 @@ public class ElementRestController {
     
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id) {
-        Element e = elementRepository.findById(id).orElseThrow(
-                () -> new ElementNotFoundException("Element Not Found :" + id));
-        return new ResponseEntity<>(e, HttpStatus.OK);
+//        Element e = elementRepository.findById(id).orElseThrow(
+//                () -> new ElementNotFoundException("Element Not Found :" + id));
+        return new ResponseEntity<>(new Element(), HttpStatus.OK);
         
     }
     

@@ -7,16 +7,15 @@ package StudioMedico.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author Chahir Chalouati
@@ -38,13 +37,13 @@ public class Element implements Serializable {
     @ManyToOne(targetEntity = TypeFood.class)
     private TypeFood typeFood;
     @Column(nullable = false)
-    @NotBlank(message = "quantity must not be blank")
+   
     private Double quantity;
     @Column(nullable = false)
-    @NotBlank(message = "minmum must not be blank")
+  
     private Double minmum;
     @Column(nullable = false)
-    @NotBlank(message = "maximum must not be blank")
+  
     private Double maximum;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
