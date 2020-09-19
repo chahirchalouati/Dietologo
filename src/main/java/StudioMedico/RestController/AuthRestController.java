@@ -44,19 +44,18 @@ public class AuthRestController {
 
     @Autowired
     AuthoritieRepository authoritieRepository;
+
     @Autowired
     UserService userService;
+
     @Autowired
     PasswordEncoder encoder;
 
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/signin")
+    @PostMapping(value = "/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
-        System.out.println(loginRequest.toString());
-
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -68,7 +67,7 @@ public class AuthRestController {
         return ResponseEntity.ok(new JwtResponse(jwt, user.getUsername()));
     }
 
-    @PostMapping("/signup")
+    @PostMapping(value = "/signup")
     public ResponseEntity<?> postAsUser(@RequestBody @Valid User user) {
         userService.register(user);
         return new ResponseEntity<>(HttpStatus.CREATED);

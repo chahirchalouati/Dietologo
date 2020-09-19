@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConversionException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.firewall.RequestRejectedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -122,10 +123,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ElementNotFoundException.class)
     public ResponseEntity<Apierror> elementNotFoundException(ElementNotFoundException e) {
         return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(), new Date(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
-    } 
-    
+    }
+
     @ExceptionHandler(UnexpectedTypeException.class)
     public ResponseEntity<Apierror> unexpectedTypeException(UnexpectedTypeException e) {
         return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(), new Date(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
-    } 
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<Apierror> badCredentialsException(BadCredentialsException e) {
+        return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(), new Date(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    }
+
 }
