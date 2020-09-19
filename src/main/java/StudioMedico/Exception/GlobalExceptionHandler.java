@@ -9,6 +9,7 @@ import StudioMedico.Exception.Exceptions.*;
 import StudioMedico.Utilities.Apierror;
 import java.util.Date;
 import javax.validation.ConstraintViolationException;
+import javax.validation.UnexpectedTypeException;
 import javax.xml.bind.DataBindingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -121,6 +122,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ElementNotFoundException.class)
     public ResponseEntity<Apierror> elementNotFoundException(ElementNotFoundException e) {
         return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(), new Date(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
-    }
-
+    } 
+    
+    @ExceptionHandler(UnexpectedTypeException.class)
+    public ResponseEntity<Apierror> unexpectedTypeException(UnexpectedTypeException e) {
+        return new ResponseEntity<>(new Apierror(e.getLocalizedMessage(), new Date(), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    } 
 }

@@ -5,7 +5,6 @@
  */
 package StudioMedico.RestController;
 
-import StudioMedico.Exception.Exceptions.DayPlanNotFoundException;
 import StudioMedico.Model.DayPlan;
 import StudioMedico.Repository.DayPlanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +37,9 @@ public class DayPlanRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id) {
-        DayPlan dayPlan = dayPlanRepository.findById(id).orElseThrow(
-                () -> new DayPlanNotFoundException(" Plan For Day Not Found " + id));
-        return new ResponseEntity<>(dayPlan, HttpStatus.OK);
+//        DayPlan dayPlan = dayPlanRepository.findById(id).orElseThrow(
+//                () -> new DayPlanNotFoundException(" Plan For Day Not Found " + id));
+        return new ResponseEntity<>(new DayPlan(), HttpStatus.OK);
 
     }
 
