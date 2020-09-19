@@ -46,8 +46,8 @@ public class UserRestController {
         return new ResponseEntity<>("User Not Found :" + id, HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping()
-    public ResponseEntity<?> postAsAdmin(@RequestBody @Valid User user) {
+    @PostMapping("/sign-up")
+    public ResponseEntity<?> postAsUser(@RequestBody @Valid User user) {
         userService.register(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

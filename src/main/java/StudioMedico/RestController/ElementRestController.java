@@ -5,6 +5,7 @@
  */
 package StudioMedico.RestController;
 
+import StudioMedico.Exception.Exceptions.ElementNotFoundException;
 import StudioMedico.Model.Element;
 import StudioMedico.Repository.ElementRepository;
 import javax.validation.Valid;
@@ -27,23 +28,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/element")
 public class ElementRestController {
-    
+
     @Autowired
     ElementRepository elementRepository;
-    
+
     @GetMapping()
     public ResponseEntity<?> list() {
         return new ResponseEntity<>(elementRepository.findAll(), HttpStatus.OK);
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<?> get(@PathVariable Long id) {
-//        Element e = elementRepository.findById(id).orElseThrow(
-//                () -> new ElementNotFoundException("Element Not Found :" + id));
-        return new ResponseEntity<>(new Element(), HttpStatus.OK);
-        
+        Element e = elementRepository.findById(id).orElseThrow(
+                () -> new ElementNotFoundException("Element Not Found :" + id));
+        return new ResponseEntity<>(e, HttpStatus.OK);
+
     }
-    
+
     @PutMapping("/{id}")
     public ResponseEntity<?> put(@PathVariable Long id, @RequestBody Element element) {
         if (elementRepository.existsById(id)) {
@@ -52,13 +53,13 @@ public class ElementRestController {
         }
         return new ResponseEntity<>("Element Not Found :" + id, HttpStatus.NOT_FOUND);
     }
-    
+
     @PostMapping
     public ResponseEntity<?> post(@RequestBody @Valid Element element) {
         elementRepository.save(element);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         if (elementRepository.existsById(id)) {
@@ -67,5 +68,5 @@ public class ElementRestController {
         }
         return new ResponseEntity<>("Element Not Found :" + id, HttpStatus.NOT_FOUND);
     }
-    
+
 }
