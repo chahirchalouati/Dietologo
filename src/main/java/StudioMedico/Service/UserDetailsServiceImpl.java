@@ -5,12 +5,15 @@
  */
 package StudioMedico.Service;
 
+import StudioMedico.Model.User;
 import StudioMedico.Repository.UserRepository;
 import StudioMedico.Utilities.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -20,11 +23,16 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepository UserRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) {
-        return new MyUserDetails(userRepository.getUserByEmail(email));
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User u = UserRepository.findByUsername(username);
+        if (u == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new MyUserDetails(u);
     }
 
 }

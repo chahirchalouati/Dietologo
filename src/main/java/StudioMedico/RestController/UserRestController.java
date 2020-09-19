@@ -6,7 +6,6 @@ import StudioMedico.Repository.AuthoritieRepository;
 import StudioMedico.Repository.UserRepository;
 import StudioMedico.Service.UserService;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,12 +43,6 @@ public class UserRestController {
             return ResponseEntity.ok().body(id);
         }
         return new ResponseEntity<>("User Not Found :" + id, HttpStatus.NOT_FOUND);
-    }
-
-    @PostMapping("/sign-up")
-    public ResponseEntity<?> postAsUser(@RequestBody @Valid User user) {
-        userService.register(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
