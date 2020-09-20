@@ -21,5 +21,6 @@ import org.springframework.stereotype.Component;
 public class JwtResponse {
 
     private String jwt;
-    private String username;
+    private String username; 
+    private String authoritie;
 }
