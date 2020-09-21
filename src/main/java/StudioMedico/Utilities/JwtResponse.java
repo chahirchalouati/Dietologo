@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtResponse {
 
-    private String jwt;
+    private String accessToken;
     private String username; 
     private String authoritie;
 }

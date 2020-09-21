@@ -24,6 +24,7 @@ public class UserRestController {
 
     @GetMapping()
     public ResponseEntity<List<User>> list() {
+
         return ResponseEntity.ok().body(userRepository.findAll());
     }
 
